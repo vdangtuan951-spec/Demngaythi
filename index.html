@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phuong Linh - Đếm ngược thi vào 10</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: white;
+  background: linear-gradient(135deg, #080d1e, #20245c, #541d65);
+}
+
+.card {
+  width: 100%;
+  max-width: 700px;
+  padding: 35px 20px;
+  text-align: center;
+  border-radius: 25px;
+  background: #ffffff12;
+  border: 1px solid #ffffff30;
+  box-shadow: 0 10px 40px #0005;
+}
+
+.brand {
+  font-size: clamp(40px, 9vw, 65px);
+  font-weight: bold;
+  background: linear-gradient(
+    90deg,
+    red, orange, yellow, lime,
+    cyan, blue, violet, red
+  );
+  background-size: 300%;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: rainbow 4s linear infinite;
+}
+
+@keyframes rainbow {
+  to {
+    background-position: 300% center;
+  }
+}
+
+h1 {
+  font-size: clamp(22px, 5vw, 32px);
+}
+
+.subtitle {
+  color: #cbd5e1;
+}
+
+.timer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 30px 0;
+}
+
+.unit {
+  padding: 18px 5px;
+  background: #080f24cc;
+  border-radius: 15px;
+}
+
+.number {
+  display: block;
+  font-size: clamp(25px, 7vw, 45px);
+  font-weight: bold;
+  color: #7dd3fc;
+  font-variant-numeric: tabular-nums;
+}
+
+.label {
+  display: block;
+  margin-top: 8px;
+  color: #cbd5e1;
+  font-size: 13px;
+}
+
+.message {
+  color: #86efac;
+  font-weight: bold;
+}
+
+footer {
+  margin-top: 25px;
+  color: #94a3b8;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+@media (max-width: 380px) {
+  .timer {
+    gap: 5px;
+  }
+
+  .unit {
+    padding: 14px 2px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <p>🎯 CHINH PHỤC MỤC TIÊU</p>
+
+  <div class="brand">Phuong Linh</div>
+
+  <h1>Đếm ngược thi tuyển sinh vào lớp 10</h1>
+
+  <p class="subtitle">
+    Cố gắng hôm nay, chạm tới ước mơ ngày mai! 📚
+  </p>
+
+  <div class="timer">
+
+    <div class="unit">
+      <span class="number" id="days">0</span>
+      <span class="label">Ngày</span>
+    </div>
+
+    <div class="unit">
+      <span class="number" id="hours">00</span>
+      <span class="label">Giờ</span>
+    </div>
+
+    <div class="unit">
+      <span class="number" id="minutes">00</span>
+      <span class="label">Phút</span>
+    </div>
+
+    <div class="unit">
+      <span class="number" id="seconds">00</span>
+      <span class="label">Giây</span>
+    </div>
+
+  </div>
+
+  <div class="message" id="message">
+    Cố lên, mục tiêu nguyện vọng 1 đang chờ bạn! 💪
+  </div>
+
+  <footer>
+    Phuong Linh © 2026 | Chúc bạn thi tốt!
+    <br>
+    Mốc đếm ngược tạm tính: 25/05/2027, 07:00
+  </footer>
+
+</div>
+
+<script>
+// Mốc thời gian: 25/05/2027 lúc 07:00 giờ Việt Nam
+// Chưa phải lịch thi Hà Tĩnh 2027 chính thức.
+const examDate = new Date(
+  "2027-05-25T07:00:00+07:00"
+).getTime();
+
+function countdown() {
+  const now = Date.now();
+  const distance = examDate - now;
+
+  if (distance <= 0) {
+    document.getElementById("days").textContent = "0";
+    document.getElementById("hours").textContent = "00";
+    document.getElementById("minutes").textContent = "00";
+    document.getElementById("seconds").textContent = "00";
+
+    document.getElementById("message").textContent =
+      "Chúc bạn thi thật bình tĩnh và tự tin! 🍀";
+
+    return;
+  }
+
+  const days = Math.floor(
+    distance / (1000 * 60 * 60 * 24)
+  );
+
+  const hours = Math.floor(
+    (distance % (1000 * 60 * 60 * 24)) /
+    (1000 * 60 * 60)
+  );
+
+  const minutes = Math.floor(
+    (distance % (1000 * 60 * 60)) /
+    (1000 * 60)
+  );
+
+  const seconds = Math.floor(
+    (distance % (1000 * 60)) / 1000
+  );
+
+  document.getElementById("days").textContent = days;
+
+  document.getElementById("hours").textContent =
+    String(hours).padStart(2, "0");
+
+  document.getElementById("minutes").textContent =
+    String(minutes).padStart(2, "0");
+
+  document.getElementById("seconds").textContent =
+    String(seconds).padStart(2, "0");
+}
+
+countdown();
+setInterval(countdown, 1000);
+</script>
+
+</body>
+  </html>
+        
